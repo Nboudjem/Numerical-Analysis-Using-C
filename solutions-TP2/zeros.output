@@ -1,0 +1,18 @@
+f1 a une solution dans l'intervalle [ x[34] , x[35] ] = [ -1.6 , -1.5 ]
+		 f( -1.6 ) = -1.80576 		 f( -1.5 ) = 0.15625
+
+
+f2 a une solution dans l'intervalle [ x[41] , x[42] ] = [ -0.9 , -0.8 ]
+		 f( -0.9 ) = -0.135542 		 f( -0.8 ) = 0.0476841
+f2 a une solution exacte pour i = 50 et x_i = 0   avec f(xi) = 0
+f2 a une solution exacte pour i = 50 et x_i = 0   avec f(xi) = 0
+f2 a une solution dans l'intervalle [ x[72] , x[73] ] = [ 2.2 , 2.3 ]
+		 f( 2.2 ) = -0.266301 		 f( 2.3 ) = 0.305719
+
+
+f3 a une solution dans l'intervalle [ x[46] , x[47] ] = [ -0.4 , -0.3 ]
+		 f( -0.4 ) = 0.0570328 		 f( -0.3 ) = -0.00601544
+f3 a une solution exacte pour i = 50 et x_i = 0   avec f(xi) = 0
+f3 a une solution exacte pour i = 50 et x_i = 0   avec f(xi) = 0
+f3 a une solution dans l'intervalle [ x[53] , x[54] ] = [ 0.3 , 0.4 ]
+		 f( 0.3 ) = 0.00601544 		 f( 0.4 ) = -0.0570328

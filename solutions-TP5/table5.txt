@@ -1,0 +1,9 @@
+# Exemple avec 6 points (x_i,y_i) i =0,...,5 que l'on représentera avec knuplot
+# et que l'on comparera avec le polynome d'interpolation de Newton (1ère formule).
+1.1	12.1	
+1.15	1.5	
+1.2	-2.5	
+1.3	-16.35	
+1.45	0.13	
+1.65	18.34	
+

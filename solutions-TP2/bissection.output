@@ -1,0 +1,16 @@
+
+
+Pour f1, nous avons une solution approchée x = -1.509410456536271
+	vérifiant f1(x) = 4.662936703425657e-15
+
+
+Pour f2, nous avons une solution approchée x = -0.8296609504097929
+	vérifiant f2(x) = 1.110223024625157e-16
+
+
+Pour f2, nous avons une solution approchée x = 2.249589776914191
+	vérifiant f2(x) = -1.77635683940025e-15
+
+
+Pour f3, nous avons une solution exacte x = 0.3137644167875309 avec f(x)=0
+	 -x est aussi solution = -0.3137644167875309 
