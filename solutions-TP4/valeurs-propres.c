@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "algebre.c"
-#include "householder.c"
 
 void methode_de_la_puissance_directe( double A[] , int n , double x0[] , double eps , double *lambda)
 {
@@ -40,7 +39,7 @@ void methode_de_la_puissance_directe( double A[] , int n , double x0[] , double 
 	for(i=1;i<=n;i++)	lambda_p += vec(x0,i)*vec(x0,i) ;
 	lambda_p = sqrt( lambda_p );
 	for(i=1;i<=n;i++)	vec(x0,i) /= lambda_p ;
-return;
+	return;
 }
 
 void resoudre_avec_PLU(int o[], double L[], double U[], double b[], int n, double x[]){
@@ -63,7 +62,7 @@ void resoudre_avec_PLU(int o[], double L[], double U[], double b[], int n, doubl
 		for (j=i+1; j<=n ; j++)	vec(x,vec(o,i)) -= mat(U,n,vec(o,i),j) * vec(x,vec(o,j)) ;
 		vec(x,vec(o,i)) /= mat(U,n,vec(o,i),i) ;
 	}
-return;
+	return;
 }
 
 void methode_de_la_puissance_inverse( double A[] , int n , double x0[] , double eps , double *lambda)
@@ -114,7 +113,7 @@ void methode_de_la_puissance_inverse( double A[] , int n , double x0[] , double 
 	for(i=1;i<=n;i++)	lambda_p += vec(x0,i)*vec(x0,i) ;
 	lambda_p = sqrt( lambda_p );
 	for(i=1;i<=n;i++)	vec(x0,i) /= lambda_p ;
-return;
+	return;
 }
 
 void methode_de_la_puissance_shifted( double A[] , int n , double x0[] , double eps , double *lambda)
@@ -145,35 +144,35 @@ void methode_de_la_puissance_shifted( double A[] , int n , double x0[] , double 
 
 	methode_de_la_puissance_inverse( B, n , x0, eps , lambda) ;
 	*lambda += lambda_s ; /* *lambda est maintenant �gale � la valeur propre de A */
-return;
+	return;
 }
 
 void decomposition_QR( double A[], int n, double Q[], double R[])
 {
-/* 
-   Cette fonction d�compose une matrice A carr�e, r�elle, inversible, en Q.R
-   avec Q orthogonale, et R triangulaire sup�rieure.
-	A = [\vec a_1  \vec a_2 ...]  ===>  A_ij = (\vec a_j)_i
-	Q = [\vec q_1  \vec q_2 ...]  ===>  Q_ij = (\vec q_j)_i
-   Les �quations sont:
-	pour i=1,...,n
-		1. Calculer $\vec a'_i = \vec a_i 
-					- \sum_{k=1}^{i-1} (\vec a_i  \cdot \vec q_k) q_k $	
-		2. $ R_{ii} = | \vec a'_i | $ (norme)
-		3. $ \vec q_i = \vec a'_i / R_{ii} $
-		4. $ R_{ij} = \vec q_i  \cdot  \vec a_j $  , pour $j=i+1,...,n$
+	/* 
+	Cette fonction d�compose une matrice A carr�e, r�elle, inversible, en Q.R
+	avec Q orthogonale, et R triangulaire sup�rieure.
+		A = [\vec a_1  \vec a_2 ...]  ===>  A_ij = (\vec a_j)_i
+		Q = [\vec q_1  \vec q_2 ...]  ===>  Q_ij = (\vec q_j)_i
+	Les �quations sont:
+		pour i=1,...,n
+			1. Calculer $\vec a'_i = \vec a_i 
+						- \sum_{k=1}^{i-1} (\vec a_i  \cdot \vec q_k) q_k $	
+			2. $ R_{ii} = | \vec a'_i | $ (norme)
+			3. $ \vec q_i = \vec a'_i / R_{ii} $
+			4. $ R_{ij} = \vec q_i  \cdot  \vec a_j $  , pour $j=i+1,...,n$
 
-  L'algorithme est donc:
-     Remplir de 0, la partie inf�rieure de R,
-     puis it�rer 1,2,3,4 ci-dessous (i=1,...,n):
-	1. Calculer $\vec a'_i = \vec a_i 
-					- \sum_{k=1}^{i-1} R_{ki} \vec q_k $
-		et mettre ce r�sultat interm�diaire dans $\vec q_i$, c'est � dire
-		utiliser l'�quation: Q_ji = A_ji - sum_{k=1}^{i-1} R_ki Q_jk pour j=1,...,n
-	2. Calculer la norme de a'_i  ===>  R_ii = SQRT( sum_{j=1}^{n} Q_ij^2 )
-	3. normaliser q_i avec Q_ji /= R_ii pour j=1,...,n
-	4. Calculer R_ij = sum_{k=1}^{n} Q_ki A_kj   pour j=1,...,i-1
-*/
+	L'algorithme est donc:
+		Remplir de 0, la partie inf�rieure de R,
+		puis it�rer 1,2,3,4 ci-dessous (i=1,...,n):
+		1. Calculer $\vec a'_i = \vec a_i 
+						- \sum_{k=1}^{i-1} R_{ki} \vec q_k $
+			et mettre ce r�sultat interm�diaire dans $\vec q_i$, c'est � dire
+			utiliser l'�quation: Q_ji = A_ji - sum_{k=1}^{i-1} R_ki Q_jk pour j=1,...,n
+		2. Calculer la norme de a'_i  ===>  R_ii = SQRT( sum_{j=1}^{n} Q_ij^2 )
+		3. normaliser q_i avec Q_ji /= R_ii pour j=1,...,n
+		4. Calculer R_ij = sum_{k=1}^{n} Q_ki A_kj   pour j=1,...,i-1
+	*/
 
 	int i,j,k,m;
 	/* Etape 0: R_ij = 0 si i>j */
@@ -203,17 +202,17 @@ void decomposition_QR( double A[], int n, double Q[], double R[])
 			for (k=1; k<=n ; k++)	mat(R,n,i,j) += mat(Q,n,k,i)*mat(A,n,k,j) ;
 		}
 	}
-return;
+	return;
 }
 
 void methode_QR( double A[], int n, double B[], int ITERATIONS)
 {
-/* 
-	A = Q.R
-	B = R.Q ===> B =  Q^t . A . Q
-	Transforme A en B. Au bout de INTERATIONS fois, B est quasi
-	triangulaire sup�rieure.
-*/
+	/* 
+		A = Q.R
+		B = R.Q ===> B =  Q^t . A . Q
+		Transforme A en B. Au bout de INTERATIONS fois, B est quasi
+		triangulaire sup�rieure.
+	*/
 	int i;
 	double Q[n*n],R[n*n];
 
@@ -222,7 +221,7 @@ void methode_QR( double A[], int n, double B[], int ITERATIONS)
 		decomposition_QR(B,n,Q,R);
 		produit_matrice_matrice(R,Q,B,n);
 	}
-return;
+	return;
 }
 
 void v_propres( double A[], int n, int ITERATIONS, double eps, double lambda[], double S[]){
@@ -235,6 +234,7 @@ void v_propres( double A[], int n, int ITERATIONS, double eps, double lambda[], 
 		methode_de_la_puissance_shifted( A, n , x, eps , &lambda[i-1] ) ;
 		for (j=1; j<= n; j++)	mat(S,n,j,i) = vec(x,j) ;
 	}
+	return;
 }
 
 void verifier_v_propres( double A[], int n, double lambda[], double S[], double B[]){
@@ -244,9 +244,10 @@ void verifier_v_propres( double A[], int n, double lambda[], double S[], double 
 				, on divise par la valeur propre */
 		for (i=1; i<=n ; i++)	mat(B,n,i,j) /= vec(lambda,j) ;
 	}
+	return;
 }
 
-main(){
+void main(){
 
 	double A[] = { /* matrice 3 x 3 */
 		 8,  -2,  -2 , 
@@ -362,7 +363,7 @@ main(){
 	*/
 	}
 
-return;
+
 
 	{/* Valeurs et vecteurs propres pour C, 8x8 */
 	double lambda[8], S[64], B[64];
@@ -377,12 +378,10 @@ return;
 	}
 
 
-/* Valeurs et vecteurs propres pour C, en utilisant Householder */
+	/* Valeurs et vecteurs propres pour C, en utilisant Householder */
 	{
 	double lambda[8], S[64], B[64], E[64];
 	int i,j;
-
-	householder_to_hessenberg(C, 8, E);
 
 	v_propres( E, 8 , ITERATIONS , eps, lambda,  S);
 
@@ -423,7 +422,7 @@ return;
 	}
 	}
 
-return;
+
 
     { /* Valeurs propre pour A: 3x3 */
 	double x0[3],x1[3], lambda;
@@ -494,6 +493,6 @@ return;
 	afficher_vecteur(x1,8);
     }
 
-return;
+	return;
 }
 

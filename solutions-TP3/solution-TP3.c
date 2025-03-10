@@ -1,32 +1,32 @@
 #include "algebre.c"
 #include "matrices.txt"
 
-main(){
+int main(){
 
-	double a_prime[3]; /* Nous déclarons les vecteurs a' , b' , et c' */
+	double a_prime[3]; /* Nous dï¿½clarons les vecteurs a' , b' , et c' */
 	double b_prime[4];
 	double c_prime[8];
 
 
-/* ***************************************************************************/
-	/* Réponse à la question 1 */
-/* ***************************************************************************/
+	/* ***************************************************************************/
+		/* Rï¿½ponse ï¿½ la question 1 */
+	/* ***************************************************************************/
 	printf("\ndouble A[] =\n");	afficher_matrice(A,3) ;
 	printf("\ndouble B[] =\n");	afficher_matrice(B,4) ;
 	printf("\ndouble C[] =\n");	afficher_matrice(C,8) ;
 
 
-/* ***************************************************************************/
-	/* Réponse à la question 2 */
-/* ***************************************************************************/
+	/* ***************************************************************************/
+		/* Rï¿½ponse ï¿½ la question 2 */
+	/* ***************************************************************************/
 	printf("\ndouble a[] =\n");	afficher_vecteur(a,3) ;
 	printf("\ndouble b[] =\n");	afficher_vecteur(b,4) ;
 	printf("\ndouble c[] =\n");	afficher_vecteur(c,8) ;
 
 
-/* ***************************************************************************/
-	/* Réponse à la question 3 */
-/* ***************************************************************************/
+	/* ***************************************************************************/
+		/* Rï¿½ponse ï¿½ la question 3 */
+	/* ***************************************************************************/
 	produit_matrice_vecteur(A,a,a_prime,3) ;
 	printf("\n a' = A . a =\n");		afficher_vecteur(a_prime,3) ;
 
@@ -37,14 +37,14 @@ main(){
 	printf("\n c' = C . c =\n");		afficher_vecteur(c_prime,8) ;
 
 
-/* ***************************************************************************/
-	/* Réponse à la question 4. */
-/* ***************************************************************************/
+	/* ***************************************************************************/
+		/* Rï¿½ponse ï¿½ la question 4. */
+	/* ***************************************************************************/
 	/* Nous ne calculons ici que A.At et At.A.
 	   Les autres produits, c'est pareil
 	*/
 	{
-		double At[9], A_At[9]; /* Nous déclarons les matrices: At est la matrice transposée */
+		double At[9], A_At[9]; /* Nous dï¿½clarons les matrices: At est la matrice transposï¿½e */
 		int i,j;
 		for(i=1;i<=3;i++){
 			for(j=1;j<=3;j++) { mat(At,3,i,j) = mat(A,3,j,i); } /* on definit la matrice At */
@@ -58,9 +58,9 @@ main(){
 		printf("\n At . A =\n");	afficher_matrice(A_At,3) ;
 	}
 
-/* ***************************************************************************/
-	/* réponse à la question 5 */
-/* ***************************************************************************/
+	/* ***************************************************************************/
+		/* rï¿½ponse ï¿½ la question 5 */
+	/* ***************************************************************************/
 	/* Calcul du determinant de A, de B et de C. */
 	{
 		double z ;
@@ -75,11 +75,11 @@ main(){
 		printf("\n det C = %10g \n" , z );
 	}
 
-/* ***************************************************************************/
-	/* réponse à la question 6 */
-/* ***************************************************************************/
-	/* Nous résolvons uniquement " A.x = a ". Le même code peut être
-	   utilisé pour résoudre  B.x = b   et  C.x = c
+	/* ***************************************************************************/
+		/* rï¿½ponse ï¿½ la question 6 */
+	/* ***************************************************************************/
+	/* Nous rï¿½solvons uniquement " A.x = a ". Le mï¿½me code peut ï¿½tre
+	   utilisï¿½ pour rï¿½soudre  B.x = b   et  C.x = c
 	*/
 	{
 	double x[3];
@@ -91,9 +91,9 @@ main(){
 	}
 
 
-/* ***************************************************************************/
-	/* réponses à la question 7 */
-/* ***************************************************************************/
+	/* ***************************************************************************/
+		/* rï¿½ponses ï¿½ la question 7 */
+	/* ***************************************************************************/
 	{ 
 	double CCC[64], III[64];
 	matrice_identite(CCC,8);
@@ -102,8 +102,8 @@ main(){
 
 	/* VERIFIONS que C . CCC = CCC . C = I (8x8) */
 	produit_matrice_matrice(C,CCC,III,8);
-	afficher_matrice(III,8); /* resultat: III très proche de l'identité
-				à cause des erreurs d'arrondis. */
+	afficher_matrice(III,8); /* resultat: III trï¿½s proche de l'identitï¿½
+				ï¿½ cause des erreurs d'arrondis. */
 
 		{ 	/*Nous rectifions maintenant: */
 			int i,j;
@@ -126,9 +126,9 @@ main(){
 		}
 
 	}
-/* ***************************************************************************/
-	/* réponses à la question 7 . VERSION 2. */
-/* ***************************************************************************/
+	/* ***************************************************************************/
+		/* rï¿½ponses ï¿½ la question 7 . VERSION 2. */
+	/* ***************************************************************************/
 	{ 
 	double CCC[64], III[64];
 	inverse_matrice(C,CCC,8);
@@ -137,6 +137,8 @@ main(){
 	produit_matrice_matrice(C,CCC,III,8);
 	afficher_matrice(III,8);
 	}
+
+	return 0;
 
 
 }

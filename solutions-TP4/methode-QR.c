@@ -6,30 +6,30 @@
 
 void decomposition_QR( double A[], int n, double Q[], double R[])
 {
-/* 
-   Cette fonction décompose une matrice A carrée, réelle, inversible, en Q.R
-   avec Q orthogonale, et R triangulaire supérieure.
-	A = [\vec a_1  \vec a_2 ...]  ===>  A_ij = (\vec a_j)_i
-	Q = [\vec q_1  \vec q_2 ...]  ===>  Q_ij = (\vec q_j)_i
-   Les équations sont:
-	pour i=1,...,n
-		1. Calculer $\vec a'_i = \vec a_i 
-					- \sum_{k=1}^{i-1} (\vec a_i  \cdot \vec q_k) q_k $	
-		2. $ R_{ii} = | \vec a'_i | $ (norme)
-		3. $ \vec q_i = \vec a'_i / R_{ii} $
-		4. $ R_{ij} = \vec q_i  \cdot  \vec a_j $  , pour $j=i+1,...,n$
+	/* 
+	Cette fonction dï¿½compose une matrice A carrï¿½e, rï¿½elle, inversible, en Q.R
+	avec Q orthogonale, et R triangulaire supï¿½rieure.
+		A = [\vec a_1  \vec a_2 ...]  ===>  A_ij = (\vec a_j)_i
+		Q = [\vec q_1  \vec q_2 ...]  ===>  Q_ij = (\vec q_j)_i
+	Les ï¿½quations sont:
+		pour i=1,...,n
+			1. Calculer $\vec a'_i = \vec a_i 
+						- \sum_{k=1}^{i-1} (\vec a_i  \cdot \vec q_k) q_k $	
+			2. $ R_{ii} = | \vec a'_i | $ (norme)
+			3. $ \vec q_i = \vec a'_i / R_{ii} $
+			4. $ R_{ij} = \vec q_i  \cdot  \vec a_j $  , pour $j=i+1,...,n$
 
-  L'algorithme est donc:
-     Remplir de 0, la partie inférieure de R,
-     puis itérer 1,2,3,4 ci-dessous (i=1,...,n):
-	1. Calculer $\vec a'_i = \vec a_i 
-					- \sum_{k=1}^{i-1} R_{ki} \vec q_k $
-		et mettre ce résultat intermédiaire dans $\vec q_i$, c'est à dire
-		utiliser l'équation: Q_ji = A_ji - sum_{k=1}^{i-1} R_ki Q_jk pour j=1,...,n
-	2. Calculer la norme de a'_i  ===>  R_ii = SQRT( sum_{j=1}^{n} Q_ij^2 )
-	3. normaliser q_i avec Q_ji /= R_ii pour j=1,...,n
-	4. Calculer R_ij = sum_{k=1}^{n} Q_ki A_kj   pour j=1,...,i-1
-*/
+	L'algorithme est donc:
+		Remplir de 0, la partie infï¿½rieure de R,
+		puis itï¿½rer 1,2,3,4 ci-dessous (i=1,...,n):
+		1. Calculer $\vec a'_i = \vec a_i 
+						- \sum_{k=1}^{i-1} R_{ki} \vec q_k $
+			et mettre ce rï¿½sultat intermï¿½diaire dans $\vec q_i$, c'est ï¿½ dire
+			utiliser l'ï¿½quation: Q_ji = A_ji - sum_{k=1}^{i-1} R_ki Q_jk pour j=1,...,n
+		2. Calculer la norme de a'_i  ===>  R_ii = SQRT( sum_{j=1}^{n} Q_ij^2 )
+		3. normaliser q_i avec Q_ji /= R_ii pour j=1,...,n
+		4. Calculer R_ij = sum_{k=1}^{n} Q_ki A_kj   pour j=1,...,i-1
+	*/
 
 	int i,j,k,m;
 	/* Etape 0: R_ij = 0 si i>j */
@@ -59,17 +59,17 @@ void decomposition_QR( double A[], int n, double Q[], double R[])
 			for (k=1; k<=n ; k++)	mat(R,n,i,j) += mat(Q,n,k,i)*mat(A,n,k,j) ;
 		}
 	}
-return;
+	return;
 }
 
 void methode_QR( double A[], int n, double B[], int ITERATIONS)
 {
-/* 
-	A = Q.R
-	B = R.Q ===> B =  Q^t . A . Q
-	Transforme A en B. Au bout de INTERATIONS fois, B est quasi
-	triangulaire supérieure.
-*/
+	/* 
+		A = Q.R
+		B = R.Q ===> B =  Q^t . A . Q
+		Transforme A en B. Au bout de INTERATIONS fois, B est quasi
+		triangulaire supï¿½rieure.
+	*/
 	int i;
 	double Q[n*n],R[n*n];
 
@@ -78,11 +78,11 @@ void methode_QR( double A[], int n, double B[], int ITERATIONS)
 		decomposition_QR(B,n,Q,R);
 		produit_matrice_matrice(R,Q,B,n);
 	}
-return;
+	return;
 }
 
 
-main(){
+void main(){
 	double A[] = { /* matrice 3 x 3 */
 		 8,  -2,  -2 , 
 		-2,   4,  -2 , 
@@ -131,5 +131,7 @@ main(){
 	printf("\n det D = %g\n" , determinant(D,4) );
 	methode_QR(D,4,DDD,400);
 	afficher_matrice(DDD,4);
+
+	return;
 }
 

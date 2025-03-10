@@ -6,9 +6,9 @@
 void decomposition_Cholesky( double A[], int n, double L[])
 {
 /* 
-   Cette fonction décompose une matrice $A$ carrée, réelle, symétrique,
-   définie positive, en un produit $L.L^t$, avec $L$ triangulaire inférieure.
-   Les équations sont:
+   Cette fonction dï¿½compose une matrice $A$ carrï¿½e, rï¿½elle, symï¿½trique,
+   dï¿½finie positive, en un produit $L.L^t$, avec $L$ triangulaire infï¿½rieure.
+   Les ï¿½quations sont:
 	${\rm\ pour\ } i=1,\dots,n :$
 	1.	$L_{ij} = 0 {\rm\ si\ } j>i $
 	2.	$L_{ij} = { 1 \over L_{jj} } \ ( A_{ij} - \sum_{k=1}^{j-1} L_{ik} L_{jk} ), {\rm pour\ }j=1,\dots,i-1$	
@@ -18,7 +18,7 @@ void decomposition_Cholesky( double A[], int n, double L[])
 	int i,j,k;
 	for(i=1; i<=n ; i++)
 		for (j=i+1; j<=n ; j++)
-			mat(L,n,i,j) = 0. ;/* des zéros dans la partie supérieure de L */
+			mat(L,n,i,j) = 0. ;/* des zï¿½ros dans la partie supï¿½rieure de L */
 	for(i=1; i<=n ; i++){
 		for (j=1; j<i ; j++){
 			/* Calcul de L_ij */
@@ -36,7 +36,7 @@ return;
 }
 
 
-main(){
+int main(){
 	double A[] = { /* matrice 3 x 3 */
 		 8,  -2,  -2 , 
 		-2,   4,  -2 , 
@@ -60,10 +60,10 @@ main(){
 
 
 
-/*	TEST matrice C, 8x8. Ok.... */
+	/*	TEST matrice C, 8x8. Ok.... */
 	for(i=1; i<=8 ; i++)
 		for (j=i+1; j<=8 ; j++)
-			mat(C,8,i,j) = mat(C,8,j,i) ;/* On symétrise C */
+			mat(C,8,i,j) = mat(C,8,j,i) ;/* On symï¿½trise C */
 	afficher_matrice(C,8);
 	decomposition_Cholesky(C,8,L);
 	afficher_matrice(L,8);
@@ -75,9 +75,9 @@ main(){
 	afficher_matrice(B,8);
 
 
-/*	TEST matrice A, 3x3. Ok....
+	/* TEST matrice A, 3x3. Ok....*/
 	afficher_matrice(A,3);
-	decomposition_Cholesky(A,3,L);
+	decomposition_Cholesky(A,3,L); 
 	afficher_matrice(L,3);
 
 	transpose(L,Lt,3);
@@ -85,6 +85,7 @@ main(){
 
 	produit_matrice_matrice(L,Lt,B,3);
 	afficher_matrice(B,3);
-*/
+
+	return 0;
 }
 

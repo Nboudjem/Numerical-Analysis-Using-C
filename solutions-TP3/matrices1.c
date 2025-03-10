@@ -1,5 +1,6 @@
 #include <stdio.h>
-main(){ 
+
+void main(){ 
     int i,j,k;
 
     double x[6]  = { 1. , 3. , 6.75 , 0. , -2. , -1.e-2 } ;
@@ -8,10 +9,10 @@ main(){
 			10,  20, 31, 42, 55, 89	};
     double u[3], R[9], S[36]; /* u=B.x ; R = B.Bt ; S = Bt.B */
 
-#define B(i,j)	   B[ ((i)-1)*6 + ((j)-1)]
-#define x(i) 	   x[ (i)-1 ]
-#define R(i,j) 	   R[ ((i)-1)*3 + ((j)-1)]
-#define u(i) 	   u[ (i)-1 ]
+    #define B(i,j)	   B[ ((i)-1)*6 + ((j)-1)]
+    #define x(i) 	   x[ (i)-1 ]
+    #define R(i,j) 	   R[ ((i)-1)*3 + ((j)-1)]
+    #define u(i) 	   u[ (i)-1 ]
 
     /* Calcul et affichage du vecteur u */
     printf("u = " );
@@ -30,4 +31,5 @@ main(){
 	   }
 	printf("\n");
       }
+    return;
 }
