@@ -157,7 +157,7 @@ void produit_matrice_vecteur(double M[], double x[], double y[], int n){
 	vec(y,i)  = 0. ;
 	for(j=1;j<=n;j++) vec(y,i) += mat(M,n,i,j) * vec(x,j) ;
    }
-return;
+	return;
 }
 
 
@@ -173,7 +173,7 @@ void produit_matrice_matrice(double M[], double N[], double R[], int n){
 		for(k=1;k<=n;k++) 	mat(R,n,i,j) += mat(M,n,i,k) * mat(N,n,k,j) ;
 	}
    }
-return;
+	return;
 }
 
 void somme_matrice_matrice(double M[], double N[], double R[], int n){
@@ -184,7 +184,7 @@ void somme_matrice_matrice(double M[], double N[], double R[], int n){
 
    for (i=1; i<=n ; i++)
 	for (j=1; j<=n ; j++)	mat(R,n,i,j) = mat(M,n,i,j) + mat(N,n,i,j) ;
-return;
+	return;
 }
 
 void produit_matrice_scalaire(double M[], double a, double N[], int n ){
@@ -264,7 +264,8 @@ void resoudre_avec_gauss(double A[], double b[], double x[], int n){
 		vec(x,i) = vec(y,i) ;
 		for (j=i+1; j<=n ; j++) 	vec(x,i) -= mat(U,n,i,j) * vec(x,j) ;
 		vec(x,i) /= mat(U,n,i,i) ;
-	}		
+	}
+	return;		
 }
 
 
@@ -334,7 +335,7 @@ void gauss_multi(double A[], int n, double B[], int m){
 		mat(B,m,vec(o,i),k) /= mat(U,n,vec(o,i),i) ;
 	    }	
 	}
-return;
+	return;
 }
 
 int gauss_PLU(double A[], int n, int o[], double L[], double U[]){
@@ -397,25 +398,25 @@ int gauss_PLU(double A[], int n, int o[], double L[], double U[]){
 	1. Nous transformons d'abord B en B' par la matrice L_ik, puis on r�soud U.X=B' .
 	*/
 	/* Les �quations seront: B en B'. B' est remis dans B */
-/*
-	for(k=1; k<n ; k++) {
-		for (i=k+1; i<=n ; i++){
-		    L_ik = mat(L,n,i,k) ;
-		    for (j=1;   j<=m ; j++)	mat(B,m,vec(o,i),j) -= mat(L,n,i,k) * mat(B,m,vec(o,k),j) ;
+	/*
+		for(k=1; k<n ; k++) {
+			for (i=k+1; i<=n ; i++){
+				L_ik = mat(L,n,i,k) ;
+				for (j=1;   j<=m ; j++)	mat(B,m,vec(o,i),j) -= mat(L,n,i,k) * mat(B,m,vec(o,k),j) ;
+			}
 		}
-	}
-*/
-	/* Les �quations seront: U.X=B' . Le r�sultat pour X dans B' */
-/*
-	for(k=1; k<=m ; k++) {
-	    for (i=n; i>=1 ; i--) {
-		for (j=i+1; j<=n ; j++) 
-			mat(B,m,vec(o,i),k) -= mat(U,n,vec(o,i),j) * mat(B,m,vec(o,j),k) ;
-		mat(B,m,vec(o,i),k) /= mat(U,n,vec(o,i),i) ;
-	    }	
-	}
-*/
-return det;
+	*/
+		/* Les �quations seront: U.X=B' . Le r�sultat pour X dans B' */
+	/*
+		for(k=1; k<=m ; k++) {
+			for (i=n; i>=1 ; i--) {
+			for (j=i+1; j<=n ; j++) 
+				mat(B,m,vec(o,i),k) -= mat(U,n,vec(o,i),j) * mat(B,m,vec(o,j),k) ;
+			mat(B,m,vec(o,i),k) /= mat(U,n,vec(o,i),i) ;
+			}	
+		}
+	*/
+	return det;
 }
 
 void produit_aAB_plus_bC(int m, int n, int k, double alpha, double A[], double B[], double beta,double C[]){
@@ -443,7 +444,7 @@ void produit_aAB_plus_bC(int m, int n, int k, double alpha, double A[], double B
 		}
 	}
    }
-return;
+	return;
 }
 
 void resoudre_avec_gauss_PLU_keep(double A[], int n, double B[], int m, double X[], int ITERATIONS){
@@ -485,8 +486,8 @@ void resoudre_avec_gauss_PLU_keep(double A[], int n, double B[], int m, double X
 	/* Jusqu'ici, nous avons une solution approch�e X que nous appellerons Xo ici
 	DB = -A.X + B
 	 */
-/* ************************************************************************************/
-/* Voici comment on peut it�rer pour rendre plus pr�cis A.X = B :
+	/* ************************************************************************************/
+	/* Voici comment on peut it�rer pour rendre plus pr�cis A.X = B :
 	On pose X = Xo + DX (toutes des matrices)
 	A ( Xo + DX ) = B  ==> A . DX = B - A.Xo = DB � r�soudre.
 	La solution sera: X <--  Xo + DX. Cette m�thode pourra �tre it�r�e comme ceci:
@@ -496,8 +497,8 @@ void resoudre_avec_gauss_PLU_keep(double A[], int n, double B[], int m, double X
 		On calcule  DB = B - A.X,
 		puis on r�soud A.DX = DB et DX esr mis dans DB ;
 		Ensuite X <- X + DX, et on revient � l'�tape 1.
-*/
-/* ************************************************************************************/
+	*/
+	/* ************************************************************************************/
 
     for (iii=1 ; iii<=ITERATIONS ; iii++){
 	/* Nous copions B dans DB */
@@ -521,16 +522,16 @@ void resoudre_avec_gauss_PLU_keep(double A[], int n, double B[], int m, double X
 	/* Etape finale: on fait X <-- X + DB */
 	for (i=0; i<n*m ; i++)	X[i] += DB[i] ;
     }
-return;
+	return;
 }
 
 void resoudre_avec_gauss_PLU(double A[], int n, double B[], int m, double X[], int ITERATIONS){
 	/* A est nxn ; B et X sont nxm ; On veut r�soudre A.X = B avec la m�thode PLU,
 	puis en am�liorant la pr�cision de mani�re it�rative. Voir plus bas. */
-/*
-	double det, L[n*n], U[n*n], DB[n*m], L_ik;
-	int i,j,k,o[n],iii;
-*/
+	/*
+		double det, L[n*n], U[n*n], DB[n*m], L_ik;
+		int i,j,k,o[n],iii;
+	*/
 	double *L, *U, *DB, det, L_ik;
 	int *o,i,j,k,iii;
 
@@ -573,19 +574,19 @@ void resoudre_avec_gauss_PLU(double A[], int n, double B[], int m, double X[], i
 	/* Jusqu'ici, nous avons une solution approch�e X que nous appellerons Xo ici
 	DB = -A.X + B
 	 */
-/* ************************************************************************************/
-/* Voici comment on peut it�rer pour rendre plus pr�cis A.X = B :
-	On pose X = Xo + DX (toutes des matrices)
-	A ( Xo + DX ) = B  ==> A . DX = B - A.Xo = DB � r�soudre.
-	La solution sera: X <--  Xo + DX. Cette m�thode pourra �tre it�r�e comme ceci:
-	A et B sont donn�s.
-		On copy B dans X et on r�soud A.X=B; la solution est dans X maintenant.
-	     1.	
-		On calcule  DB = B - A.X,
-		puis on r�soud A.DX = DB et DX esr mis dans DB ;
-		Ensuite X <- X + DX, et on revient � l'�tape 1.
-*/
-/* ************************************************************************************/
+	/* ************************************************************************************/
+	/* Voici comment on peut it�rer pour rendre plus pr�cis A.X = B :
+		On pose X = Xo + DX (toutes des matrices)
+		A ( Xo + DX ) = B  ==> A . DX = B - A.Xo = DB � r�soudre.
+		La solution sera: X <--  Xo + DX. Cette m�thode pourra �tre it�r�e comme ceci:
+		A et B sont donn�s.
+			On copy B dans X et on r�soud A.X=B; la solution est dans X maintenant.
+			1.	
+			On calcule  DB = B - A.X,
+			puis on r�soud A.DX = DB et DX esr mis dans DB ;
+			Ensuite X <- X + DX, et on revient � l'�tape 1.
+	*/
+	/* ************************************************************************************/
 
     for (iii=1 ; iii<=ITERATIONS ; iii++){
 	/* Nous copions B dans DB */
@@ -613,7 +614,7 @@ void resoudre_avec_gauss_PLU(double A[], int n, double B[], int m, double X[], i
 	free(U);
 	free(DB);
 	free(o);
-return;
+	return;
 }
 
 
@@ -626,7 +627,7 @@ void inverse_matrice_simple( double A[], double A_inverse[], int n){
 
 void inverse_matrice( double A[], double A_inverse[], int n, int ITERATIONS){
 	/* calcule l'inverse de la matrice A, et met le resultat dans A_inverse */
-/*	double B[n*n]; */
+	/*	double B[n*n]; */
 	double *B;
 	B = 		calloc( sizeof(double) , n*n );
 
